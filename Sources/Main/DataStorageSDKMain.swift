@@ -3,9 +3,9 @@
 
 import Foundation
 
-import DataStorageDetails
+import DataStorageDetail
 
-public class DataStorageSDKMain {
+public class DataStorageMain {
     
     private var dataProvider: DataStorageProviderStrategy
     

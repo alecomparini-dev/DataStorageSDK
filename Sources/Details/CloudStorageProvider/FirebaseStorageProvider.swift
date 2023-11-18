@@ -5,7 +5,7 @@ import Foundation
 
 import FirebaseFirestore
 
-public class FirebaseStorageProvider: StorageProviderStrategy {
+public class FirebaseStorageProvider: DataStorageProviderStrategy {
     
     private var db: Firestore!
     

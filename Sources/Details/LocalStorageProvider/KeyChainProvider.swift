@@ -6,7 +6,7 @@ import Security
 
 import DataStorageInterfaces
 
-public class KeyChainProvider: StorageProviderStrategy {
+public class KeyChainProvider: DataStorageProviderStrategy {
     
     private let appName: String
    

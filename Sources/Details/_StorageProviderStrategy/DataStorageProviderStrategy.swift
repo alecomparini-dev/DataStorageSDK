@@ -5,7 +5,7 @@ import Foundation
 
 import DataStorageInterfaces
 
-public class StorageProviderStrategy: PersistenceProvider, PersistenceJSONProvider {
+public class DataStorageProviderStrategy: PersistenceProvider, PersistenceJSONProvider {
     
     public init() {}
     

@@ -56,7 +56,7 @@ public class KeyChainProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - FETCH
-    public override func fetch<T>() async throws -> [T] {
+    public override func fetch<T>() async throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
@@ -75,12 +75,14 @@ public class KeyChainProvider: DataStorageProviderStrategy {
                        let value = String(data: valueData, encoding: .utf8) {
                         return [account : value] as! T
                     }
+                    
                     return [:] as! T
-                }
+                    
+                } as? T
             }
         }
         
-        return []
+        return nil 
     }
     
 

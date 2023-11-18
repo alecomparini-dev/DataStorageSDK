@@ -1,23 +1,62 @@
 // swift-tools-version: 5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "DataStorageSDK",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "DataStorageSDK",
-            targets: ["DataStorageSDK"]),
+
+    platforms: [
+        .iOS(.v14),
+        .macOS(.v10_15)
     ],
+    
+    products: [
+        .library(name: "DataStorageSDKMain", targets: ["DataStorageSDKMain"]),
+    ],
+    
+    
+    dependencies: [
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.18.0"))
+    ],
+    
+    
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
+        
+//  MARK: - TARGET INTERFACE ADAPTERS
+        
         .target(
-            name: "DataStorageSDK"),
-        .testTarget(
-            name: "DataStorageSDKTests",
-            dependencies: ["DataStorageSDK"]),
+            name: "DataStorageInterfaces",
+            dependencies: [],
+            path: "Sources/1InterfaceAdapter/Interfaces"
+        ),
+   
+        
+//  MARK: - TARGET DETAIL
+        
+        .target(
+            name: "DataStorageDetails",
+            dependencies: [
+                "DataStorageInterfaces",
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
+            ],
+            path: "Sources/Details"
+        ),
+        
+        
+        
+//  MARK: - TARGET MAIN
+        .target(
+            name: "DataStorageSDKMain",
+            dependencies: [
+                "DataStorageDetails",
+            ],
+            path: "Sources/Main"
+        ),
+
+
+//  MARK: - TESTS TARGETS AREA
+        
+//        .testTarget(name: "DataStorageSDKTests", dependencies: []),
+        
     ]
 )

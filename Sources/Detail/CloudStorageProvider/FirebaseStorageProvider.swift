@@ -42,23 +42,23 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - FETCH
-    public override func fetch<T>() async throws -> [T] {
+    public override func fetch<T>() async throws -> T? {
         
         let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
         
         let data: [QueryDocumentSnapshot] = querySnapshot.documents
         
-        return data.map { $0.data() as! T }
+        return data.map { $0.data() } as? T
     }
     
     
-    public override func fetch<T>(limit: Int) async throws -> [T] {
+    public override func fetch<T>(limit: Int) async throws -> T? {
         
         let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
         
         let data: [QueryDocumentSnapshot] = querySnapshot.documents
         
-        return data.map { $0.data() as! T }
+        return data.map { $0.data() } as? T
     }
     
     public override func fetchCount() async throws -> Int {

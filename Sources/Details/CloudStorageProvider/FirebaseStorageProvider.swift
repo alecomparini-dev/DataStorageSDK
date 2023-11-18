@@ -36,7 +36,7 @@ public class FirebaseStorageProvider: StorageProviderStrategy {
 
         data.updateValue(document.documentID, forKey: "documentID")
         
-        return [:] as? T
+        return data as? T
     }
 
     
@@ -44,8 +44,25 @@ public class FirebaseStorageProvider: StorageProviderStrategy {
 //  MARK: - FETCH
     public override func fetch<T>() async throws -> [T] {
         
+        let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
         
-        return []
+        let data: [QueryDocumentSnapshot] = querySnapshot.documents
+        
+        return data.map { $0.data() as! T }
+    }
+    
+    
+    public override func fetch<T>(limit: Int) async throws -> [T] {
+        
+        let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
+        
+        let data: [QueryDocumentSnapshot] = querySnapshot.documents
+        
+        return data.map { $0.data() as! T }
+    }
+    
+    public override func fetchCount() async throws -> Int {
+        return try await db.collection(collection).getDocuments().count
     }
 
     

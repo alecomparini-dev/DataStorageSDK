@@ -27,7 +27,7 @@ let package = Package(
         .target(
             name: "DataStorageInterfaces",
             dependencies: [],
-            path: "Sources/1InterfaceAdapters/Interfaces"
+            path: "Sources/1InterfaceAdapter/Interfaces"
         ),
    
         

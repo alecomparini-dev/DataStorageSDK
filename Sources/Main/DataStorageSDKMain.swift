@@ -28,6 +28,14 @@ public class DataStorageSDKMain {
     public func fetch<T>() async throws -> [T] {
         return try await dataProvider.fetch()
     }
+    
+    public func fetchCount() async throws -> Int {
+        return try await dataProvider.fetchCount()
+    }
+    
+    public func fetch<T>(limit: Int) async throws -> [T] {
+        return try await dataProvider.fetch()
+    }
 
     public func fetchById<T>(_ id: String) async throws -> T? {
         return try await dataProvider.fetchById(id)
@@ -36,4 +44,5 @@ public class DataStorageSDKMain {
     public func findByColumn<T, DataType>(column: String, value: DataType) async throws -> [T] {
         return try await dataProvider.findByColumn(column: column, value: value)
     }
+    
 }

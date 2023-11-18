@@ -24,6 +24,14 @@ public class StorageProviderStrategy: PersistenceProvider, PersistenceJSONProvid
     public func fetch<T>() async throws -> [T] {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
+    
+    public func fetch<T>(limit: Int) async throws -> [T] {
+        fatalError("The method fetch, needs to be implemented by the subclasses ")
+    }
+
+    public func fetchCount() async throws -> Int {
+        fatalError("The method fetch, needs to be implemented by the subclasses ")
+    }
 
     public func fetchById<T>(_ id: String) async throws -> T? {
         fatalError("The method fetchByID, needs to be implemented by the subclasses ")

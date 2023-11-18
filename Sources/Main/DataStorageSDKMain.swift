@@ -7,9 +7,9 @@ import DataStorageDetails
 
 public class DataStorageSDKMain {
     
-    private var dataProvider: StorageProviderStrategy
+    private var dataProvider: DataStorageProviderStrategy
     
-    public init(dataProvider: StorageProviderStrategy) {
+    public init(dataProvider: DataStorageProviderStrategy) {
         self.dataProvider = dataProvider
     }
     

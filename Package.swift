@@ -34,12 +34,12 @@ let package = Package(
 //  MARK: - TARGET DETAIL
         
         .target(
-            name: "DataStorageDetails",
+            name: "DataStorageDetail",
             dependencies: [
                 "DataStorageInterfaces",
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Details"
+            path: "Sources/Detail"
         ),
         
         
@@ -48,7 +48,7 @@ let package = Package(
         .target(
             name: "DataStorageSDKMain",
             dependencies: [
-                "DataStorageDetails",
+                "DataStorageDetail",
             ],
             path: "Sources/Main"
         ),

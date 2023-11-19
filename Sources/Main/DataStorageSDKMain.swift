@@ -29,14 +29,14 @@ public class DataStorageMain {
         return try await dataProvider.fetch()
     }
     
+    public func fetch<T>(limit: Int) async throws -> T? {
+        return try await dataProvider.fetch(limit: limit)
+    }
+    
     public func fetchCount() async throws -> Int {
         return try await dataProvider.fetchCount()
     }
     
-    public func fetch<T>(limit: Int) async throws -> T? {
-        return try await dataProvider.fetch()
-    }
-
     public func fetchById<T>(_ id: String) async throws -> T? {
         return try await dataProvider.fetchById(id)
     }

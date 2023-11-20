@@ -37,10 +37,6 @@ public class DataStorageMain {
         return try await dataProvider.fetchCount()
     }
     
-    public func fetchCount(_ document: String) async throws -> Int {
-        return try await dataProvider.fetchCount(document)
-    }
-    
     public func fetchById<T>(_ id: String) async throws -> T? {
         return try await dataProvider.fetchById(id)
     }
@@ -48,5 +44,19 @@ public class DataStorageMain {
     public func findByColumn<T, DataType>(column: String, value: DataType) async throws -> T? {
         return try await dataProvider.findByColumn(column: column, value: value)
     }
+
     
+//  MARK: - JSON AREA
+    public func insert<T>(_ key: String, _ object: T) async throws -> T? {
+        return try await dataProvider.insert(key, object)
+    }
+    
+    public func update<T>(_ key: String, _ object: T) async throws -> T {
+        return try await dataProvider.update(key, object)
+    }
+
+    public func fetchCount(_ key: String) async throws -> Int {
+        return try await dataProvider.fetchCount(key)
+    }
+
 }

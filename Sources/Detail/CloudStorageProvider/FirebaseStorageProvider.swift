@@ -67,7 +67,7 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
     
     public override func fetchCount(_ document: String) async throws -> Int {
         let path = collection + "/" + document
-        return try await db.collection(collection).getDocuments().count
+        return try await db.collection(path).getDocuments().count
     }
 
     

@@ -51,4 +51,8 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceJSONPr
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
     
+    public func fetchCount(_ document: String) async throws -> Int {
+        fatalError("The method update, needs to be implemented by the subclasses ")
+    }
+    
 }

@@ -23,7 +23,7 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
     public override func insert<T>(_ document: String, _ object: T) async throws -> T? {
         guard let data = object as? [String : Any] else { return object }
         
-        try await db.collection(collection).document(document).setData(data)
+        try await db.collection(collection).addDocument(data: data)
         
         return object
     }

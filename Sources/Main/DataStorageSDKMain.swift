@@ -37,6 +37,10 @@ public class DataStorageMain {
         return try await dataProvider.fetchCount()
     }
     
+    public func fetchCount(_ document: String) async throws -> Int {
+        return try await dataProvider.fetchCount(document)
+    }
+    
     public func fetchById<T>(_ id: String) async throws -> T? {
         return try await dataProvider.fetchById(id)
     }

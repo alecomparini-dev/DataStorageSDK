@@ -4,9 +4,9 @@
 import Foundation
 
 import DataStorageInterfaces
-
-public class CoreDataProvider: DataStorageProviderStrategy {
-    
-    
-    
-}
+//
+//public class CoreDataProvider: DataStorageProviderStrategy {
+//    
+//    
+//    
+//}

@@ -5,27 +5,27 @@ import Foundation
 
 import DataStorageInterfaces
 
-public class DataStorageProviderStrategy: PersistenceProvider, PersistenceJSONProvider {
+public class DataStorageProviderStrategy<T>: PersistenceProvider, PersistenceJSONProvider {
     
     public init() {}
     
-    public func insert<T>(_ object: T) async throws -> T? {
+    public func insert(_ object: T) async throws -> T? {
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
     
-    public func delete<T>(_ object: T) async throws {
+    public func delete(_ object: T) async throws {
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
     
-    public func update<T>(_ object: T) async throws -> T {
+    public func update(_ object: T) async throws -> T {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
 
-    public func fetch<T>() async throws -> T? {
+    public func fetch() async throws -> T? {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
     
-    public func fetch<T>(limit: Int) async throws -> T? {
+    public func fetch(limit: Int) async throws -> T? {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
 
@@ -33,21 +33,21 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceJSONPr
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
 
-    public func fetchById<T>(_ id: String) async throws -> T? {
+    public func fetchById(_ id: String) async throws -> T? {
         fatalError("The method fetchByID, needs to be implemented by the subclasses ")
     }
 
-    public func findByColumn<T, DataType>(column: String, value: DataType) async throws -> T? {
+    public func findByColumn<DataType>(column: String, value: DataType) async throws -> T? {
         fatalError("The method findByColumn, needs to be implemented by the subclasses ")
     }
     
     
 //  MARK: - PersistenceJSONProvider
-    public func insert<T>(_ key: String, _ value: T) async throws -> T? {
+    public func insert(_ key: String, _ value: T) async throws -> T? {
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
     
-    public func update<T>(_ key: String, _ value: T) async throws -> T {
+    public func update(_ key: String, _ value: T) async throws -> T {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
     

@@ -4,8 +4,7 @@
 import Foundation
 import RealmSwift
 
-public class RealmProvider<O: Identifiable<UUID>>: DataStorageProviderStrategy
-where O: Object {
+public class RealmProvider {
     
     private var realm: Realm
     

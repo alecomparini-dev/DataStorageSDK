@@ -5,7 +5,7 @@ import Foundation
 
 import DataStorageInterfaces
 
-public class UserDefaultsProvider: DataStorageProviderStrategy {
+public class UserDefaultsProvider<T>: DataStorageProviderStrategy<T> {
     
     private let userDefaults: UserDefaults
     
@@ -13,12 +13,12 @@ public class UserDefaultsProvider: DataStorageProviderStrategy {
         self.userDefaults = userDefaults
     }
     
-    public override func insert<T>(_ key: String, _ value: T) async throws -> T {
+    public override func insert(_ key: String, _ value: T) async throws -> T {
         userDefaults.set(value, forKey: key)
         return value
     }
     
-    public override func fetchById<T>(_ forKey: String) async throws -> T?  {
+    public override func fetchById(_ forKey: String) async throws -> T?  {
         if let result = userDefaults.value(forKey: forKey) as? T {
             return result
         }

@@ -28,7 +28,6 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
         return object
     }
 
-    
     public override func insert<T>(_ object: T) async throws -> T? {
         guard var data = object as? [String : Any] else { return object }
         
@@ -50,7 +49,6 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
         
         return data.map { $0.data() } as? T
     }
-    
     
     public override func fetch<T>(limit: Int) async throws -> T? {
         

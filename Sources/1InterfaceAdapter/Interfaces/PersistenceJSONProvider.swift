@@ -6,5 +6,6 @@ import Foundation
 public protocol PersistenceJSONProvider {
     func insert<T>(_ key: String, _ value: T) async throws -> T?
     func update<T>(_ key: String, _ value: T) async throws -> T
+    func fetchCount(_ key: String) async throws -> Int
 }
 

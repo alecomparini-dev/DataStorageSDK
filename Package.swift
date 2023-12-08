@@ -16,7 +16,8 @@ let package = Package(
     
     
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.18.0"))
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.18.0")),
+        .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "10.44.0"))
     ],
     
     
@@ -37,7 +38,8 @@ let package = Package(
             name: "DataStorageDetail",
             dependencies: [
                 "DataStorageInterfaces",
-                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
+                .product(name: "RealmSwift", package: "realm-swift")
             ],
             path: "Sources/Detail"
         ),

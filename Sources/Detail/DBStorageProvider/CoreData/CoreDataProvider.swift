@@ -6,8 +6,8 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class CoreDataProvider<T>: DataStorageProviderStrategy<T>
-where T: Identifiable<UUID>, T: NSManagedObject {
+public class CoreDataProvider<T: Identifiable<UUID>>: DataStorageProviderStrategy<T>
+where T: NSManagedObject {
     
     private let container: NSPersistentContainer
     
@@ -27,17 +27,22 @@ where T: Identifiable<UUID>, T: NSManagedObject {
         
         let context = container.viewContext
         
+//        guard let object = object as? NSManagedObject else {
+//            debugPrint("Error: Object must be NSManagedObject")
+//            return nil
+//        }
         context.insert(object)
         
         if context.hasChanges {
             do{
                 try context.save()
             }catch{
-                fatalError("Error: \(error.localizedDescription)")
+                debugPrint("Error: \(error.localizedDescription)")
+                return nil
             }
         }
         
-        return object
+        return object 
     }
     
     

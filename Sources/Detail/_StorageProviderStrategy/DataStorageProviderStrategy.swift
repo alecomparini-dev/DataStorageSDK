@@ -13,46 +13,46 @@ public class DataStorageProviderStrategy<T>: PersistenceProvider, PersistenceJSO
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
     
-    public func delete(_ object: T) async throws {
-        fatalError("The method delete, needs to be implemented by the subclasses ")
-    }
-    
-    public func update(_ object: T) async throws -> T {
-        fatalError("The method update, needs to be implemented by the subclasses ")
-    }
-
-    public func fetch() async throws -> T? {
-        fatalError("The method fetch, needs to be implemented by the subclasses ")
-    }
-    
-    public func fetch(limit: Int) async throws -> T? {
-        fatalError("The method fetch, needs to be implemented by the subclasses ")
-    }
-
-    public func fetchCount() async throws -> Int {
-        fatalError("The method fetch, needs to be implemented by the subclasses ")
-    }
-
-    public func fetchById(_ id: String) async throws -> T? {
-        fatalError("The method fetchByID, needs to be implemented by the subclasses ")
-    }
-
-    public func findByColumn<DataType>(column: String, value: DataType) async throws -> T? {
-        fatalError("The method findByColumn, needs to be implemented by the subclasses ")
-    }
-    
-    
-//  MARK: - PersistenceJSONProvider
-    public func insert(_ key: String, _ value: T) async throws -> T? {
-        fatalError("The method insert, needs to be implemented by the subclasses ")
-    }
-    
-    public func update(_ key: String, _ value: T) async throws -> T {
-        fatalError("The method update, needs to be implemented by the subclasses ")
-    }
-    
-    public func fetchCount(_ document: String) async throws -> Int {
-        fatalError("The method update, needs to be implemented by the subclasses ")
-    }
+//    public func delete(_ object: T) async throws {
+//        fatalError("The method delete, needs to be implemented by the subclasses ")
+//    }
+//    
+//    public func update(_ object: T) async throws -> T {
+//        fatalError("The method update, needs to be implemented by the subclasses ")
+//    }
+//
+//    public func fetch() async throws -> T? {
+//        fatalError("The method fetch, needs to be implemented by the subclasses ")
+//    }
+//    
+//    public func fetch(limit: Int) async throws -> T? {
+//        fatalError("The method fetch, needs to be implemented by the subclasses ")
+//    }
+//
+//    public func fetchCount() async throws -> Int {
+//        fatalError("The method fetch, needs to be implemented by the subclasses ")
+//    }
+//
+//    public func fetchById(_ id: String) async throws -> T? {
+//        fatalError("The method fetchByID, needs to be implemented by the subclasses ")
+//    }
+//
+//    public func findByColumn<DataType>(column: String, value: DataType) async throws -> T? {
+//        fatalError("The method findByColumn, needs to be implemented by the subclasses ")
+//    }
+//    
+//    
+////  MARK: - PersistenceJSONProvider
+//    public func insert(_ key: String, _ value: T) async throws -> T? {
+//        fatalError("The method insert, needs to be implemented by the subclasses ")
+//    }
+//    
+//    public func update(_ key: String, _ value: T) async throws -> T {
+//        fatalError("The method update, needs to be implemented by the subclasses ")
+//    }
+//    
+//    public func fetchCount(_ document: String) async throws -> Int {
+//        fatalError("The method update, needs to be implemented by the subclasses ")
+//    }
     
 }

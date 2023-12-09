@@ -6,8 +6,7 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class CoreDataProvider<T: Identifiable<UUID>>: DataStorageProviderStrategy<T>
-where T: NSManagedObject {
+public class CoreDataProvider<T: NSManagedObject>: PersistenceProvider {
     
     private let container: NSPersistentContainer
     
@@ -23,7 +22,7 @@ where T: NSManagedObject {
     
     
 //  MARK: - INSERT
-    public override func insert(_ object: T) async throws -> T? {
+    public func insert(_ object: T) async throws -> T? {
         
         let context = container.viewContext
         
@@ -45,6 +44,28 @@ where T: NSManagedObject {
         return object 
     }
     
+//    
+//    public func insert<T>(_ object: T) async throws -> T? {
+//        
+//        let context = container.viewContext
+//        
+//        guard let object = object as? NSManagedObject else {
+//            debugPrint("Error: Object must be NSManagedObject")
+//            return nil
+//        }
+//        context.insert(object)
+//        
+//        if context.hasChanges {
+//            do{
+//                try context.save()
+//            }catch{
+//                debugPrint("Error: \(error.localizedDescription)")
+//                return nil
+//            }
+//        }
+//        
+//        return object as? T
+//    }
     
     
 }

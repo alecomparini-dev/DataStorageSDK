@@ -3,9 +3,9 @@
 
 import Foundation
 import RealmSwift
+import DataStorageInterfaces
 
-public class RealmProvider<T: Identifiable<UUID>>: DataStorageProviderStrategy<T>
-where T: Object {
+public class RealmProvider<T: Object>: PersistenceProvider {
     
     private var realm: Realm
     
@@ -27,7 +27,8 @@ where T: Object {
     
     
 //  MARK: - INSERT
-    public override func insert(_ object: T) async throws -> T? {
+
+    public func insert(_ object: T) async throws -> T? {
         try self.realm.write {
             self.realm.add(object)
         }

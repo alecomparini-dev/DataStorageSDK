@@ -3,8 +3,15 @@
 
 import Foundation
 
+public protocol CoreDataPersistence {
+    
+}
+
 public protocol PersistenceProvider {
     associatedtype T
+//    associatedtype C
+//    func insert(_ object: C) async throws -> C?
+    
     func insert(_ object: T) async throws -> T?
     
 //    func delete(_ object: T) async throws

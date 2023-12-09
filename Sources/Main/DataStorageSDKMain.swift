@@ -4,6 +4,7 @@
 import Foundation
 
 import DataStorageDetail
+import DataStorageInterfaces
 
 public class DataStorageMain<T> {
     
@@ -16,7 +17,8 @@ public class DataStorageMain<T> {
     public func insert(_ object: T) async throws -> T? {
         return try await dataProvider.insert(object)
     }
-//    
+    
+//
 //    public func delete(_ object: T) async throws {
 //        return try await dataProvider.delete(object)
 //    }

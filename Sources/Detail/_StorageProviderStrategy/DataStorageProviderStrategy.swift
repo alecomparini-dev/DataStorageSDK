@@ -7,7 +7,12 @@ import DataStorageInterfaces
 
 public class DataStorageProviderStrategy<T>: PersistenceProvider, PersistenceJSONProvider {
     
+    
     public init() {}
+    
+//    public func insert(_ object: C) async throws -> C? {
+//        fatalError("The method insert, needs to be implemented by the subclasses ")
+//    }
     
     public func insert(_ object: T) async throws -> T? {
         fatalError("The method insert, needs to be implemented by the subclasses ")

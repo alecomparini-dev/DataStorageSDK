@@ -5,7 +5,7 @@ import Foundation
 
 import FirebaseFirestore
 
-public class FirebaseStorageProvider: DataStorageProviderStrategy {
+public class FirebaseStorageProvider<T>: DataStorageProviderStrategy<T> {
     
     private var db: Firestore!
     
@@ -20,7 +20,7 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - INSERT
-    public override func insert<T>(_ document: String, _ object: T) async throws -> T? {
+    public override func insert(_ document: String, _ object: T) async throws -> T? {
         guard let data = object as? [String : Any] else { return object }
         
         try await db.collection(collection).addDocument(data: data)
@@ -28,7 +28,7 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
         return object
     }
 
-    public override func insert<T>(_ object: T) async throws -> T? {
+    public override func insert(_ object: T) async throws -> T? {
         guard var data = object as? [String : Any] else { return object }
         
         let document: DocumentReference = try await db.collection(collection).addDocument(data: data)
@@ -41,7 +41,7 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - FETCH
-    public override func fetch<T>() async throws -> T? {
+    public override func fetch() async throws -> T? {
         
         let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
         
@@ -50,7 +50,7 @@ public class FirebaseStorageProvider: DataStorageProviderStrategy {
         return data.map { $0.data() } as? T
     }
     
-    public override func fetch<T>(limit: Int) async throws -> T? {
+    public override func fetch(limit: Int) async throws -> T? {
         
         let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
         

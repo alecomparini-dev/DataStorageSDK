@@ -4,9 +4,11 @@
 import Foundation
 import Security
 
+import RealmSwift
+
 import DataStorageInterfaces
 
-public class KeyChainProvider: DataStorageProviderStrategy {
+public class KeyChainProvider<T>: DataStorageProviderStrategy<T> {
     
     private let appName: String
    
@@ -16,7 +18,7 @@ public class KeyChainProvider: DataStorageProviderStrategy {
 
     
 //  MARK: - INSERT
-    public override func insert<T>(_ key: String, _ value: T) async throws -> T? {
+    public override func insert(_ key: String, _ value: T) async throws -> T? {
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -25,7 +27,7 @@ public class KeyChainProvider: DataStorageProviderStrategy {
             kSecValueData as String: try JSONEncoder().encode(value as? [String])
         ]
         
-        try await delete(key)
+        try await delete(key as! T)
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
@@ -39,7 +41,7 @@ public class KeyChainProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - DELETE
-    public override func delete<T>(_ key: T) async throws {
+    public override func delete(_ key: T) async throws {
         let deleteQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
@@ -56,7 +58,7 @@ public class KeyChainProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - FETCH
-    public override func fetch<T>() async throws -> T? {
+    public override func fetch() async throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
@@ -87,7 +89,7 @@ public class KeyChainProvider: DataStorageProviderStrategy {
     
 
 //  MARK: - FETCH BY ID
-    public override func fetchById<T>(_ forKey: String) async throws -> T? {
+    public override func fetchById(_ forKey: String) async throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,

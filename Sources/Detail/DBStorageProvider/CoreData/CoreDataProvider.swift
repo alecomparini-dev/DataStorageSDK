@@ -12,7 +12,7 @@ public class CoreDataProvider: DataStorageProviderStrategy {
     
     public init(container: NSPersistentContainer = NSPersistentContainer(name: "Main")) {
         self.container = container
-        container.loadPersistentStores { description, error in
+        self.container.loadPersistentStores { description, error in
             if error != nil {
                 fatalError("Cannot Load Core Data Model")
             }

@@ -5,8 +5,8 @@ import Foundation
 import RealmSwift
 import DataStorageInterfaces
 
-public class RealmProvider<T: Object>: PersistenceProvider {
-    
+public class RealmProvider: RealmPersistenceProvider {
+
     private var realm: Realm
     
     public init(realm: Realm? = nil) throws {
@@ -28,7 +28,14 @@ public class RealmProvider<T: Object>: PersistenceProvider {
     
 //  MARK: - INSERT
 
-    public func insert(_ object: T) async throws -> T? {
+//    public func insert(_ object: T) async throws -> T? {
+//        try self.realm.write {
+//            self.realm.add(object)
+//        }
+//        return object
+//    }
+    
+    public func insert<T: Object>(_ object: T) async throws -> T? {
         try self.realm.write {
             self.realm.add(object)
         }

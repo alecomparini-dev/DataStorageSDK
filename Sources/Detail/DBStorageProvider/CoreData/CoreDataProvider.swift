@@ -6,7 +6,7 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class CoreDataProvider<T: NSManagedObject>: PersistenceProvider {
+public class CoreDataProvider: CoreDataPersistenceProvider {
     
     private let container: NSPersistentContainer
     
@@ -22,7 +22,7 @@ public class CoreDataProvider<T: NSManagedObject>: PersistenceProvider {
     
     
 //  MARK: - INSERT
-    public func insert(_ object: T) async throws -> T? {
+    public func insert<T: NSManagedObject>(_ object: T) async throws -> T? {
         
         let context = container.viewContext
         

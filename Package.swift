@@ -27,7 +27,10 @@ let package = Package(
         
         .target(
             name: "DataStorageInterfaces",
-            dependencies: [],
+            dependencies: [
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
+                .product(name: "RealmSwift", package: "realm-swift")
+            ],
             path: "Sources/1InterfaceAdapter/Interfaces"
         ),
    

@@ -8,7 +8,7 @@ import RealmSwift
 
 import DataStorageInterfaces
 
-public class KeyChainProvider<T>: DataStorageProviderStrategy<T> {
+public class KeyChainProvider {
     
     private let appName: String
    

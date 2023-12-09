@@ -3,9 +3,10 @@
 
 import Foundation
 
+import DataStorageInterfaces
 import FirebaseFirestore
 
-public class FirebaseStorageProvider<T>: DataStorageProviderStrategy<T> {
+public class FirebaseStorageProvider: DefaultPersistenceProvider {
     
     private var db: Firestore!
     
@@ -13,7 +14,6 @@ public class FirebaseStorageProvider<T>: DataStorageProviderStrategy<T> {
     
     public init(collection: String) {
         self.collection = collection
-        super.init()
         configure()
     }
     
@@ -28,7 +28,7 @@ public class FirebaseStorageProvider<T>: DataStorageProviderStrategy<T> {
 //        return object
 //    }
 
-    public override func insert(_ object: T) async throws -> T? {
+    public func insert<T>(_ object: T) async throws -> T? {
         guard var data = object as? [String : Any] else { return object }
         
         let document: DocumentReference = try await db.collection(collection).addDocument(data: data)

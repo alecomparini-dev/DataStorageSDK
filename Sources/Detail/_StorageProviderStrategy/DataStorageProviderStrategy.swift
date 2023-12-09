@@ -3,20 +3,44 @@
 
 import Foundation
 
+import RealmSwift
+import CoreData
+
 import DataStorageInterfaces
 
-public class DataStorageProviderStrategy<T>: PersistenceProvider, PersistenceJSONProvider {
-    
+public class DataStorageProviderStrategy {
     
     public init() {}
     
+}
+
+//  MARK: - EXTENSION - RealmProtocolProvider
+
+extension DataStorageProviderStrategy: RealmPersistenceProvider {
+    
+    public func insert<T: Object>(_ object: T) async throws -> T? {
+        fatalError("The method insert, needs to be implemented by the subclasses ")
+    }
+    
+}
+
+//  MARK: - EXTENSION -  CoreDataProtocolProvider
+extension DataStorageProviderStrategy: CoreDataPersistenceProvider {
+    
+    public func insert<T: NSManagedObject>(_ object: T) async throws -> T? {
+        fatalError("The method insert, needs to be implemented by the subclasses ")
+    }
+    
+}
+    
+
 //    public func insert(_ object: C) async throws -> C? {
 //        fatalError("The method insert, needs to be implemented by the subclasses ")
 //    }
     
-    public func insert(_ object: T) async throws -> T? {
-        fatalError("The method insert, needs to be implemented by the subclasses ")
-    }
+//    public func insert<T>(_ object: T) async throws -> T? {
+//        fatalError("The method insert, needs to be implemented by the subclasses ")
+//    }
     
 //    public func delete(_ object: T) async throws {
 //        fatalError("The method delete, needs to be implemented by the subclasses ")
@@ -60,4 +84,4 @@ public class DataStorageProviderStrategy<T>: PersistenceProvider, PersistenceJSO
 //        fatalError("The method update, needs to be implemented by the subclasses ")
 //    }
     
-}
+//}

@@ -5,7 +5,7 @@ import Foundation
 
 import DataStorageInterfaces
 
-public class UserDefaultsProvider<T>: DataStorageProviderStrategy<T> {
+public class UserDefaultsProvider {
     
     private let userDefaults: UserDefaults
     

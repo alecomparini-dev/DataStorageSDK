@@ -11,19 +11,16 @@ import DataStorageInterfaces
 
 public class DataStorageMain {
     
-    private var dataProvider: PersistenceProvider
+    private var dataProvider: DataStorageProviderStrategy
     
-    public init(dataProvider: PersistenceProvider) {
+    public init(dataProvider: DataStorageProviderStrategy) {
         self.dataProvider = dataProvider
     }
     
-    public func insert<T: RealmProtocol>(_ object: T) async throws -> T? {
+    public func insert<T>(_ object: T) async throws -> T? {
         return try await dataProvider.insert(object)
     }
     
-    public func insert<T: CoreDataProtocol>(_ object: T) async throws -> T? {
-        return try await dataProvider.insert(object)
-    }
     
 //
 //    public func delete(_ object: T) async throws {

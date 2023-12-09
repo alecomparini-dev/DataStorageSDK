@@ -8,31 +8,17 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class DataStorageProviderStrategy {
+public class DataStorageProviderStrategy: PersistenceProvider {
     
     public init() {}
     
-}
-
-//  MARK: - EXTENSION - RealmProtocolProvider
-
-extension DataStorageProviderStrategy: RealmPersistenceProvider {
-    
-    public func insert<T: Object>(_ object: T) async throws -> T? {
+    public func insert<T>(_ object: T) async throws -> T? {
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
     
 }
 
-//  MARK: - EXTENSION -  CoreDataProtocolProvider
-extension DataStorageProviderStrategy: CoreDataPersistenceProvider {
-    
-    public func insert<T: NSManagedObject>(_ object: T) async throws -> T? {
-        fatalError("The method insert, needs to be implemented by the subclasses ")
-    }
-    
-}
-    
+
 
 //    public func insert(_ object: C) async throws -> C? {
 //        fatalError("The method insert, needs to be implemented by the subclasses ")

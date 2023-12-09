@@ -5,7 +5,7 @@ import Foundation
 import RealmSwift
 import DataStorageInterfaces
 
-public class RealmProvider: RealmPersistenceProvider {
+public class RealmProvider: DataStorageProviderStrategy {
 
     private var realm: Realm
     
@@ -27,19 +27,17 @@ public class RealmProvider: RealmPersistenceProvider {
     
     
 //  MARK: - INSERT
-
-//    public func insert(_ object: T) async throws -> T? {
-//        try self.realm.write {
-//            self.realm.add(object)
-//        }
-//        return object
-//    }
     
-    public func insert<T: Object>(_ object: T) async throws -> T? {
+    public override func insert<T>(_ object: T) async throws -> T? {
+        guard let object = object as? Object else {
+            debugPrint("Error: Object must be NSManagedObject")
+            return nil
+        }
+        
         try self.realm.write {
             self.realm.add(object)
         }
-        return object
+        return object as? T
     }
     
     

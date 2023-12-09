@@ -6,7 +6,7 @@ import Foundation
 import DataStorageInterfaces
 import FirebaseFirestore
 
-public class FirebaseStorageProvider: DefaultPersistenceProvider {
+public class FirebaseStorageProvider: PersistenceProvider {
     
     private var db: Firestore!
     

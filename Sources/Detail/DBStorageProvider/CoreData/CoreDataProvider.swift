@@ -6,7 +6,7 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class CoreDataProvider: CoreDataPersistenceProvider {
+public class CoreDataProvider: DataStorageProviderStrategy {
     
     private let container: NSPersistentContainer
     
@@ -22,14 +22,15 @@ public class CoreDataProvider: CoreDataPersistenceProvider {
     
     
 //  MARK: - INSERT
-    public func insert<T: NSManagedObject>(_ object: T) async throws -> T? {
+    public override func insert<T>(_ object: T) async throws -> T? {
         
         let context = container.viewContext
         
-//        guard let object = object as? NSManagedObject else {
-//            debugPrint("Error: Object must be NSManagedObject")
-//            return nil
-//        }
+        guard let object = object as? NSManagedObject else {
+            debugPrint("Error: Object must be NSManagedObject")
+            return nil
+        }
+        
         context.insert(object)
         
         if context.hasChanges {
@@ -41,7 +42,7 @@ public class CoreDataProvider: CoreDataPersistenceProvider {
             }
         }
         
-        return object 
+        return object as? T
     }
     
 //    

@@ -3,10 +3,10 @@
 
 import Foundation
 import RealmSwift
+import DataStorageInterfaces
 
-public class RealmProvider<T>: DataStorageProviderStrategy<T>
-where T: Object, T: Identifiable<UUID> {
-    
+public class RealmDataStorageProvider: DataStorageProviderStrategy {
+
     private var realm: Realm
     
     public init(realm: Realm? = nil) throws {
@@ -27,11 +27,17 @@ where T: Object, T: Identifiable<UUID> {
     
     
 //  MARK: - INSERT
-    public override func insert(_ object: T) async throws -> T? {
+    
+    public override func create<T>(_ object: T) async throws -> T? {
+        guard let object = object as? Object else {
+            debugPrint("Error: Object must be NSManagedObject")
+            return nil
+        }
+        
         try self.realm.write {
             self.realm.add(object)
         }
-        return object
+        return object as? T
     }
     
     

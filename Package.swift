@@ -27,7 +27,10 @@ let package = Package(
         
         .target(
             name: "DataStorageInterfaces",
-            dependencies: [],
+            dependencies: [
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
+                .product(name: "RealmSwift", package: "realm-swift")
+            ],
             path: "Sources/1InterfaceAdapter/Interfaces"
         ),
    
@@ -35,7 +38,7 @@ let package = Package(
 //  MARK: - TARGET DETAIL
         
         .target(
-            name: "DataStorageDetail",
+            name: "DataStorageSDKMain",
             dependencies: [
                 "DataStorageInterfaces",
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
@@ -46,15 +49,6 @@ let package = Package(
         
         
         
-//  MARK: - TARGET MAIN
-        .target(
-            name: "DataStorageSDKMain",
-            dependencies: [
-                "DataStorageDetail",
-            ],
-            path: "Sources/Main"
-        ),
-
 
 //  MARK: - TESTS TARGETS AREA
         

@@ -30,13 +30,17 @@ public class RealmDataStorageProvider: DataStorageProviderStrategy {
     
     public override func create<T>(_ object: T) async throws -> T? {
         guard let object = object as? Object else {
-            debugPrint("Error: Object must be NSManagedObject")
-            return nil
+            throw(DataStorageError.objectMustBeNSManagedObject)
         }
         
-        try self.realm.write {
-            self.realm.add(object)
+        do {
+            try self.realm.write {
+                self.realm.add(object)
+            }
+        } catch let error {
+            throw(DataStorageError.createError( "Error: \(error.localizedDescription)" ))
         }
+        
         return object as? T
     }
     

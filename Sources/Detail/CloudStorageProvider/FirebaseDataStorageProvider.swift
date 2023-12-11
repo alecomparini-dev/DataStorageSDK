@@ -2,11 +2,10 @@
 //
 
 import Foundation
-
 import DataStorageInterfaces
 import FirebaseFirestore
 
-public class FirebaseDataStorageProvider: PersistenceProvider {
+public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
     
     private var db: Firestore!
     
@@ -14,6 +13,7 @@ public class FirebaseDataStorageProvider: PersistenceProvider {
     
     public init(collection: String) {
         self.collection = collection
+        super.init()
         configure()
     }
     
@@ -28,7 +28,7 @@ public class FirebaseDataStorageProvider: PersistenceProvider {
 //        return object
 //    }
 
-    public func create<T>(_ object: T) async throws -> T? {
+    public override func create<T>(_ object: T) async throws -> T? {
         guard var data = object as? [String : Any] else { return object }
         
         let document: DocumentReference = try await db.collection(collection).addDocument(data: data)
@@ -38,31 +38,29 @@ public class FirebaseDataStorageProvider: PersistenceProvider {
         return data as? T
     }
 
-//    
-//    
-////  MARK: - FETCH
-//    public override func fetch() async throws -> T? {
-//        
-//        let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
-//        
-//        let data: [QueryDocumentSnapshot] = querySnapshot.documents
-//        
-//        return data.map { $0.data() } as? T
-//    }
-//    
-//    public override func fetch(limit: Int) async throws -> T? {
-//        
-//        let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
-//        
-//        let data: [QueryDocumentSnapshot] = querySnapshot.documents
-//        
-//        return data.map { $0.data() } as? T
-//    }
-//    
-//    public override func fetchCount() async throws -> Int {
-//        return try await db.collection(collection).getDocuments().count
-//    }
-//    
+    
+//  MARK: - FETCH
+    
+    public override func fetch<T>() async throws -> T? {
+        let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
+        
+        let data: [QueryDocumentSnapshot] = querySnapshot.documents
+        
+        return data.map { $0.data() } as? T
+    }
+    
+    public override func fetch<T>(limit: Int) async throws -> T? {
+        let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
+        
+        let data: [QueryDocumentSnapshot] = querySnapshot.documents
+        
+        return data.map { $0.data() } as? T
+    }
+    
+    public override func fetchCount() async throws -> Int {
+        return try await db.collection(collection).getDocuments().count
+    }
+    
 //    public override func fetchCount(_ document: String) async throws -> Int {
 //        let path = collection + "/" + document
 //        return try await db.collection(path).getDocuments().count

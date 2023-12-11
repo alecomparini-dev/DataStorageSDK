@@ -17,7 +17,7 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - INSERT
     public override func create<T>(_ object: T) async throws -> T? {
-                
+        
         guard let object = object as? NSManagedObject else {
             throw(DataStorageError.objectMustBeNSManagedObject)
         }
@@ -27,7 +27,7 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         if context.hasChanges {
             do{
                 try context.save()
-            } catch {
+            } catch let error {
                 throw(DataStorageError.createError( "Error: \(error.localizedDescription)" ))
             }
         }
@@ -35,5 +35,18 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         return object as? T
     }
     
+    
+//  MARK: - FETCH
+    
+    public override func fetch<T>() async throws -> T? {
+        
+        guard let object = T.self as? NSManagedObject.Type else {
+            throw(DataStorageError.objectMustBeNSManagedObject)
+        }
+        
+        let request = object.fetchRequest()
+        
+        return try context.fetch(request) as? T
+    }
     
 }

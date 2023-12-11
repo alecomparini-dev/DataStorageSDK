@@ -5,5 +5,6 @@ import Foundation
 
 public enum DataStorageError: Error {
     case objectMustBeNSManagedObject
+    case objectMustBeRealmObject
     case createError(_ message: String)
 }

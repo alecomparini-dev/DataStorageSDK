@@ -6,7 +6,7 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class CoreDataProvider: DataStorageProviderStrategy {
+public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
     private let container: NSPersistentContainer
     

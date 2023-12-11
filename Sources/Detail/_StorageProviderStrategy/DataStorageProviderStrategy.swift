@@ -12,20 +12,20 @@ public class DataStorageProviderStrategy: PersistenceProvider {
     
     public init() {}
     
-    public func insert<T>(_ object: T) async throws -> T? {
-        fatalError("The method insert, needs to be implemented by the subclasses ")
+    public func create<T>(_ object: T) async throws -> T? {
+        fatalError("The method create, needs to be implemented by the subclasses ")
     }
     
 }
 
 
 
-//    public func insert(_ object: C) async throws -> C? {
-//        fatalError("The method insert, needs to be implemented by the subclasses ")
+//    public func create(_ object: C) async throws -> C? {
+//        fatalError("The method create, needs to be implemented by the subclasses ")
 //    }
     
-//    public func insert<T>(_ object: T) async throws -> T? {
-//        fatalError("The method insert, needs to be implemented by the subclasses ")
+//    public func create<T>(_ object: T) async throws -> T? {
+//        fatalError("The method create, needs to be implemented by the subclasses ")
 //    }
     
 //    public func delete(_ object: T) async throws {
@@ -58,8 +58,8 @@ public class DataStorageProviderStrategy: PersistenceProvider {
 //    
 //    
 ////  MARK: - PersistenceJSONProvider
-//    public func insert(_ key: String, _ value: T) async throws -> T? {
-//        fatalError("The method insert, needs to be implemented by the subclasses ")
+//    public func create(_ key: String, _ value: T) async throws -> T? {
+//        fatalError("The method create, needs to be implemented by the subclasses ")
 //    }
 //    
 //    public func update(_ key: String, _ value: T) async throws -> T {

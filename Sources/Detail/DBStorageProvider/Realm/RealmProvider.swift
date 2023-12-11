@@ -28,7 +28,7 @@ public class RealmProvider: DataStorageProviderStrategy {
     
 //  MARK: - INSERT
     
-    public override func insert<T>(_ object: T) async throws -> T? {
+    public override func create<T>(_ object: T) async throws -> T? {
         guard let object = object as? Object else {
             debugPrint("Error: Object must be NSManagedObject")
             return nil

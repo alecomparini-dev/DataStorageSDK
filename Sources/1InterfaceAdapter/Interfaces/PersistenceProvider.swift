@@ -9,7 +9,7 @@ import CoreData
 
 
 public protocol PersistenceProvider{
-    func insert<T>(_ object: T) async throws -> T?
+    func create<T>(_ object: T) async throws -> T?
     
 //    func delete(_ object: T) async throws
 //    func update(_ object: T) async throws -> T

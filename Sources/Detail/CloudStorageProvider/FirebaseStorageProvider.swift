@@ -20,7 +20,7 @@ public class FirebaseStorageProvider: PersistenceProvider {
 //    
 //    
 ////  MARK: - INSERT
-//    public override func insert(_ document: String, _ object: T) async throws -> T? {
+//    public override func create(_ document: String, _ object: T) async throws -> T? {
 //        guard let data = object as? [String : Any] else { return object }
 //        
 //        try await db.collection(collection).addDocument(data: data)
@@ -28,7 +28,7 @@ public class FirebaseStorageProvider: PersistenceProvider {
 //        return object
 //    }
 
-    public func insert<T>(_ object: T) async throws -> T? {
+    public func create<T>(_ object: T) async throws -> T? {
         guard var data = object as? [String : Any] else { return object }
         
         let document: DocumentReference = try await db.collection(collection).addDocument(data: data)

@@ -8,18 +8,16 @@ import DataStorageInterfaces
 
 public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
-    private let container: NSPersistentContainer
+    private let context:  NSManagedObjectContext
     
-    public init(container: NSPersistentContainer) {
-        self.container = container
+    public init(context:  NSManagedObjectContext ) {
+        self.context = context
     }
     
     
 //  MARK: - INSERT
     public override func create<T>(_ object: T) async throws -> T? {
-        
-        let context = container.viewContext
-        
+                
         guard let object = object as? NSManagedObject else {
             throw(DataStorageError.objectMustBeNSManagedObject)
         }

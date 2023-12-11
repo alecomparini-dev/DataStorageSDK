@@ -20,10 +20,6 @@ public class DataStorageProviderStrategy: PersistenceProvider {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
     
-    public func fetch<T>(_ object: T.Type) async throws -> T? {
-        fatalError("The method fetch, needs to be implemented by the subclasses ")
-    }
-
     public func fetch<T>(limit: Int) async throws -> T? {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }

@@ -3,7 +3,6 @@
 
 import Foundation
 import CoreData
-
 import DataStorageInterfaces
 
 public class CoreDataStorageProvider: DataStorageProviderStrategy {
@@ -12,6 +11,7 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
     public init(context:  NSManagedObjectContext ) {
         self.context = context
+        super.init()
     }
     
     

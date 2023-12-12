@@ -32,7 +32,7 @@ public class DataStorageProviderStrategy: PersistenceProvider {
         fatalError("The method fetchByID, needs to be implemented by the subclasses ")
     }
 
-    public func findByColumn<T,D>(column: String, value: D) async throws -> [T]? {
+    public func findByColumn<T,D>(column: String, value: D) async throws -> [T] {
         fatalError("The method findByColumn, needs to be implemented by the subclasses ")
     }
 

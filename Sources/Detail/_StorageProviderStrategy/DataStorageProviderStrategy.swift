@@ -8,14 +8,17 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class DataStorageProviderStrategy: PersistenceProvider {
+public class DataStorageProviderStrategy: PersistenceProvider, PersistenceJSONProvider {
     
     public init() {}
-    
+
+//  MARK: - CREATE
     public func create<T>(_ object: T) async throws -> T? {
         fatalError("The method create, needs to be implemented by the subclasses ")
     }
 
+    
+//  MARK: - FETCH
     public func fetch<T>() async throws -> [T] {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
@@ -37,6 +40,17 @@ public class DataStorageProviderStrategy: PersistenceProvider {
     }
 
     
+    
+//  MARK: - PersistenceJSONProvider
+    public func create<T>(_ key: String, _ value: T) async throws -> T? {
+        fatalError("The method create, needs to be implemented by the subclasses ")
+    }
+    
+    public func fetchCount(_ key: String) async throws -> Int {
+        fatalError("The method update, needs to be implemented by the subclasses ")
+    }
+
+
 }
 
 
@@ -52,16 +66,11 @@ public class DataStorageProviderStrategy: PersistenceProvider {
 //
 //    
 ////  MARK: - PersistenceJSONProvider
-//    public func create(_ key: String, _ value: T) async throws -> T? {
-//        fatalError("The method create, needs to be implemented by the subclasses ")
-//    }
+
 //    
 //    public func update(_ key: String, _ value: T) async throws -> T {
 //        fatalError("The method update, needs to be implemented by the subclasses ")
 //    }
 //    
-//    public func fetchCount(_ document: String) async throws -> Int {
-//        fatalError("The method update, needs to be implemented by the subclasses ")
-//    }
     
 //}

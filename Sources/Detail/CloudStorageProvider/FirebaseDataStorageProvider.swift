@@ -17,16 +17,7 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
         configure()
     }
     
-//    
-//    
-////  MARK: - INSERT
-//    public override func create(_ document: String, _ object: T) async throws -> T? {
-//        guard let data = object as? [String : Any] else { return object }
-//        
-//        try await db.collection(collection).addDocument(data: data)
-//        
-//        return object
-//    }
+//  MARK: - INSERT
 
     public override func create<T>(_ object: T) async throws -> T? {
         guard var data = object as? [String : Any] else { return object }
@@ -38,6 +29,15 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
         return data as? T
     }
 
+
+    public override func create<T>(_ document: String, _ object: T) async throws -> T? {
+        guard let data = object as? [String : Any] else { return object }
+        
+        try await db.collection(collection).addDocument(data: data)
+        
+        return object
+    }
+    
     
 //  MARK: - FETCH
     
@@ -61,10 +61,10 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
         return try await db.collection(collection).getDocuments().count
     }
     
-//    public override func fetchCount(_ document: String) async throws -> Int {
-//        let path = collection + "/" + document
-//        return try await db.collection(path).getDocuments().count
-//    }
+    public override func fetchCount(_ document: String) async throws -> Int {
+        let path = collection + "/" + document
+        return try await db.collection(path).getDocuments().count
+    }
 
     
 //  MARK: - PRIVATE AREA

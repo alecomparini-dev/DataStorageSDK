@@ -8,7 +8,7 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class DataStorageProviderStrategy: PersistenceProvider, PersistenceJSONProvider {
+public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLProvider {
     
     public init() {}
 

@@ -31,9 +31,11 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
 
 
     public override func create<T>(_ document: String, _ object: T) async throws -> T? {
-        guard let data = object as? [String : Any] else { return object }
+        guard var data = object as? [String : Any] else { return object }
         
-        try await db.collection(collection).addDocument(data: data)
+        let path = collection + "/" + document
+        
+        let document: DocumentReference = try await db.collection(path).addDocument(data: data)
         
         return object
     }

@@ -9,7 +9,6 @@ import CoreData
 import DataStorageInterfaces
 
 public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLProvider {
-    
     public init() {}
 
 //  MARK: - CREATE
@@ -19,11 +18,11 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
 
     
 //  MARK: - FETCH
-    public func fetch<T>() async throws -> T? {
+    public func fetch<T>() async throws -> [T] {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
     
-    public func fetch<T>(limit: Int) async throws -> T? {
+    public func fetch<T>(limit: Int) async throws -> [T] {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
 

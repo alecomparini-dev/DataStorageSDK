@@ -30,6 +30,10 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
 
+    
+    
+//  MARK: - FIND BY
+    
     public func findBy<T>(_ id: String) async throws -> [T] {
         fatalError("The method fetchByID, needs to be implemented by the subclasses ")
     }
@@ -44,6 +48,10 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     
     public func create<T>(_ key: String, _ value: T) async throws -> T? {
         fatalError("The method create, needs to be implemented by the subclasses ")
+    }
+
+    public func fetch<T>(_ document: String) async throws -> [T] {
+        fatalError("The method fetchByID, needs to be implemented by the subclasses ")
     }
     
     public func fetchCount(_ key: String) async throws -> Int {

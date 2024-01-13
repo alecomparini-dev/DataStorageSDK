@@ -18,7 +18,7 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
 
     
 //  MARK: - FETCH
-    public func fetch<T>() async throws -> [T] {
+    public func fetch<T>() async throws -> T {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
     

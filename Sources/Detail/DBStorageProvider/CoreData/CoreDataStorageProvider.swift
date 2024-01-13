@@ -40,9 +40,9 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
     public override func fetch<T>() async throws -> [T] {
         
-//        guard let object = T.self as? NSManagedObject.Type else {
-//            throw DataStorageError.objectMustBeNSManagedObject
-//        }
+        guard let object = T.self as? NSManagedObject.Type else {
+            throw DataStorageError.objectMustBeNSManagedObject
+        }
         
         let request = object.fetchRequest()
  

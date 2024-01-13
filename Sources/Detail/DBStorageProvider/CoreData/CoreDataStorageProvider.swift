@@ -38,24 +38,15 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - FETCH
     
-    public override func fetch<T>() async throws -> T? {
-        var object: NSManagedObject.Type?
+    public override func fetch<T>() async throws -> [T] {
         
-        if let obj = T.self as? NSManagedObject.Type {
-            object = obj
+        guard let object = T.self as? NSManagedObject.Type else {
+            throw DataStorageError.objectMustBeNSManagedObject
         }
-        
-        if let obj = [T].self.Element as? NSManagedObject.Type {
-            object = obj
-        }
-            
-        guard let object else { throw DataStorageError.objectMustBeNSManagedObject }
         
         let request = object.fetchRequest()
- 
-        guard let result = try context.fetch(request) as? T else { return nil}
         
-        return result
+        return try context.fetch(request) as? [T] ?? []
     }
     
 }

@@ -8,6 +8,7 @@ public protocol PersistenceProvider{
     func create<T>(_ object: T) async throws -> T?
     
     func fetch<T>() async throws -> [T]
+    func fetch<T>() async throws -> T?
     func fetch<T>(limit: Int) async throws -> [T]
     func fetchCount() async throws -> Int
     

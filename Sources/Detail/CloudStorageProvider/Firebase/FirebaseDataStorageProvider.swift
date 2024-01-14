@@ -91,10 +91,11 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - FIND BY
     
-    public override func findBy<T>(_ document: String) async throws -> [T] {
-        let path = collection + "/" + document
+    public override func findBy<T>(_ id: String) async throws -> [T] {
+        let path = collection
         
-        let querySnapshot: QuerySnapshot = try await db.collection(path).getDocuments()
+        let querySnapshot: QuerySnapshot = try await db.collection(path)
+            .getDocuments()
         
         let data: [QueryDocumentSnapshot] = querySnapshot.documents
         

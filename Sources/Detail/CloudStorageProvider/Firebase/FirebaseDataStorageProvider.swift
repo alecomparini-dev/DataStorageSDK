@@ -48,31 +48,31 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - FETCH
     
-    public override func fetch<T>() async throws -> [T] {
-        let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
-        
-        let data: [QueryDocumentSnapshot] = querySnapshot.documents
-        
-        return data.map { $0.data() } as? [T] ?? []
-    }
-    
-    public override func fetch<T>(_ document: String) async throws -> [T] {
-        let path = collection + "/" + document
-        
-        let querySnapshot: QuerySnapshot = try await db.collection(path).getDocuments()
-        
-        let data: [QueryDocumentSnapshot] = querySnapshot.documents
-        
-        return data.map { $0.data() } as? [T] ?? []
-    }
-    
-    public override func fetch<T>(limit: Int) async throws -> [T] {
-        let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
-        
-        let data: [QueryDocumentSnapshot] = querySnapshot.documents
-        
-        return data.map { $0.data() } as? [T] ?? []
-    }
+//    public override func fetch<T>() async throws -> [T] {
+//        let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
+//        
+//        let data: [QueryDocumentSnapshot] = querySnapshot.documents
+//        
+//        return data.map { $0.data() } as? [T] ?? []
+//    }
+//    
+//    public override func fetch<T>(_ document: String) async throws -> [T] {
+//        let path = collection + "/" + document
+//        
+//        let querySnapshot: QuerySnapshot = try await db.collection(path).getDocuments()
+//        
+//        let data: [QueryDocumentSnapshot] = querySnapshot.documents
+//        
+//        return data.map { $0.data() } as? [T] ?? []
+//    }
+//    
+//    public override func fetch<T>(limit: Int) async throws -> [T] {
+//        let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
+//        
+//        let data: [QueryDocumentSnapshot] = querySnapshot.documents
+//        
+//        return data.map { $0.data() } as? [T] ?? []
+//    }
 
     
     

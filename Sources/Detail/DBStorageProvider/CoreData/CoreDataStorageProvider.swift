@@ -40,12 +40,15 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
     public override func fetch<T>() async throws -> T? {
         
-        if let arryObj = T.self as? Array<NSManagedObject.Type>.Element {
-            if let object = arryObj as? NSManagedObject.Type {
-                print("foi")
-            }
+        let tipoDoArray = type(of: T.self)
+        
+        if tipoDoArray is NSManagedObject.Type.Type {
+            print("O tipo genérico é um NSManagedObject")
+        } else {
+            print("O tipo genérico não é um NSManagedObject")
         }
-
+                    
+            
         guard let object = T.self as? NSManagedObject.Type else {
             throw DataStorageError.objectMustBeNSManagedObject
         }

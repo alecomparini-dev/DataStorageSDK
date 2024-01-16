@@ -10,6 +10,7 @@ import DataStorageInterfaces
 
 
 public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLProvider {
+
     public init() {}
 
 //  MARK: - CREATE
@@ -34,7 +35,7 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     
 //  MARK: - FIND BY
     
-    public func findBy<T>(_ id: String) async throws -> [T] {
+    public func findBy<T>(_ id: String) async throws -> T? {
         fatalError("The method fetchByID, needs to be implemented by the subclasses ")
     }
 
@@ -44,7 +45,7 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
 
     
     
-//  MARK: - PersistenceNOSQL
+//  MARK: - PersistenceNOSQLProvider
     
     //  MARK: - CREATE
     public func create<T>(_ key: String, _ value: T) async throws -> T? {
@@ -73,7 +74,7 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     
     
     //  MARK: - FIND
-    public func findByID<T>(_ path: String, _ key: String) async throws -> T? {
+    public func findBy<T>(_ path: String, _ key: String) async throws -> T? {
         fatalError("The method findByID, needs to be implemented by the subclasses ")
     }
 

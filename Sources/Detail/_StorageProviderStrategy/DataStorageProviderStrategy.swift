@@ -8,13 +8,9 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class DataStorageProviderStrategy {
+
+public class DataStorageProviderStrategySQL: PersistenceProvider {
     public init() {}
-}
-
-
-public class DataStorageProviderStrategySQL: DataStorageProviderStrategy, PersistenceProvider {
-    public override init() {}
 
 //  MARK: - CREATE
     public func create<T>(_ object: T) async throws -> T? {
@@ -89,6 +85,15 @@ public class DataStorageProviderStrategyNOSQL: DataStorageProviderStrategySQL, P
         fatalError("The method findByID, needs to be implemented by the subclasses ")
     }
     
+}
+
+
+public class DataStorageProviderStrategy {
+    
+    public let sql = DataStorageProviderStrategySQL()
+    public let noSQL = DataStorageProviderStrategyNOSQL()
+    
+    public init() {}
 }
 
 

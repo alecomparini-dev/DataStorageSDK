@@ -5,7 +5,7 @@ import Foundation
 import CoreData
 import DataStorageInterfaces
 
-public class CoreDataStorageProvider: DataStorageProviderStrategy {
+public class CoreDataStorageProvider: DataStorageProviderStrategySQL {
     
     private let context:  NSManagedObjectContext
     

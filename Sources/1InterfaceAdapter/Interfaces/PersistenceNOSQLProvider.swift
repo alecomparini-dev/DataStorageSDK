@@ -12,7 +12,7 @@ public protocol PersistenceNOSQLProvider {
         
     func fetchCount(_ path: String) async throws -> Int
     
-    func findByID<T>(_ path: String, _ key: String) async throws -> T?
+    func findBy<T>(_ path: String, _ key: String) async throws -> T?
     
 //    func update(_ key: String, _ value: T) async throws -> T
 }

@@ -80,7 +80,7 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - FIND BY
     
-    public override func findByID<T>(_ collection: String, _ documentID: String) async throws -> T? {
+    public override func findBy<T>(_ collection: String, _ documentID: String) async throws -> T? {
         let querySnapshot: DocumentSnapshot = try await db.collection(collection)
             .document(documentID)
             .getDocument()

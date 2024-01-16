@@ -8,8 +8,13 @@ import CoreData
 
 import DataStorageInterfaces
 
-public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLProvider {
+public class DataStorageProviderStrategy {
     public init() {}
+}
+
+
+public class DataStorageProviderStrategySQL: DataStorageProviderStrategy, PersistenceProvider {
+    public override init() {}
 
 //  MARK: - CREATE
     public func create<T>(_ object: T) async throws -> T? {
@@ -46,19 +51,44 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     
 //  MARK: - PersistenceJSONProvider
     
+
+}
+
+
+public class DataStorageProviderStrategyNOSQL: DataStorageProviderStrategySQL, PersistenceNOSQLProvider {
+    
+    
+    //  MARK: - CREATE
     public func create<T>(_ key: String, _ value: T) async throws -> T? {
         fatalError("The method create, needs to be implemented by the subclasses ")
     }
-
-    public func fetch<T>(_ document: String) async throws -> [T] {
-        fatalError("The method fetchByID, needs to be implemented by the subclasses ")
+    
+    public func create<T>(_ path: String, _ key: String, _ value: T) async throws -> T? {
+        fatalError("The method create, needs to be implemented by the subclasses ")
     }
     
-    public func fetchCount(_ key: String) async throws -> Int {
-        fatalError("The method update, needs to be implemented by the subclasses ")
+
+    //  MARK: - FETCH
+    public func fetch<T>(_ path: String) async throws -> [T] {
+        fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
-
-
+    
+    public func fetch<T>(_ path: String, limit: Int) async throws -> [T] {
+        fatalError("The method fetch with limit, needs to be implemented by the subclasses ")
+    }
+    
+    
+    //  MARK: - COUNT
+    public func fetchCount(_ key: String) async throws -> Int {
+        fatalError("The method fetchCount, needs to be implemented by the subclasses ")
+    }
+    
+    
+    //  MARK: - FIND
+    public func findByID<T>(_ path: String, _ key: String) async throws -> T? {
+        fatalError("The method findByID, needs to be implemented by the subclasses ")
+    }
+    
 }
 
 

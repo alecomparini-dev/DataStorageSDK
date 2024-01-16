@@ -9,7 +9,7 @@ import CoreData
 import DataStorageInterfaces
 
 
-public class DataStorageProviderStrategy: PersistenceProvider {
+public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLProvider {
     public init() {}
 
 //  MARK: - CREATE

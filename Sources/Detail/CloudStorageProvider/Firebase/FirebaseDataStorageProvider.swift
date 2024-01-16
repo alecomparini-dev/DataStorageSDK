@@ -9,11 +9,16 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategyNOSQL {
     
     private var _db: Firestore!
     
-    public init(db: Firestore) {
-        self._db = db
+    public override init() {
         super.init()
         configure()
     }
+    
+    public init(db: Firestore) {
+        self._db = db
+        super.init()
+    }
+    
     
 //  MARK: - GET PROPERTIES
     

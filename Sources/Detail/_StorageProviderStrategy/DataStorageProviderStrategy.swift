@@ -9,7 +9,7 @@ import CoreData
 import DataStorageInterfaces
 
 
-public class DataStorageProviderStrategySQL: PersistenceProvider {
+public class DataStorageProviderStrategy: PersistenceProvider {
     public init() {}
 
 //  MARK: - CREATE
@@ -32,7 +32,6 @@ public class DataStorageProviderStrategySQL: PersistenceProvider {
     }
 
     
-    
 //  MARK: - FIND BY
     
     public func findBy<T>(_ id: String) async throws -> [T] {
@@ -45,14 +44,7 @@ public class DataStorageProviderStrategySQL: PersistenceProvider {
 
     
     
-//  MARK: - PersistenceJSONProvider
-    
-
-}
-
-
-public class DataStorageProviderStrategyNOSQL: DataStorageProviderStrategySQL, PersistenceNOSQLProvider {
-    
+//  MARK: - PersistenceNOSQL
     
     //  MARK: - CREATE
     public func create<T>(_ key: String, _ value: T) async throws -> T? {
@@ -84,17 +76,12 @@ public class DataStorageProviderStrategyNOSQL: DataStorageProviderStrategySQL, P
     public func findByID<T>(_ path: String, _ key: String) async throws -> T? {
         fatalError("The method findByID, needs to be implemented by the subclasses ")
     }
-    
+
 }
 
 
-public class DataStorageProviderStrategy {
-    
-    public let sql = DataStorageProviderStrategySQL()
-    public let noSQL = DataStorageProviderStrategyNOSQL()
-    
-    public init() {}
-}
+
+
 
 
 

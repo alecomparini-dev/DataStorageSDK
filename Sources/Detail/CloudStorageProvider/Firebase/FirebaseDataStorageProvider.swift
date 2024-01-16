@@ -5,7 +5,7 @@ import Foundation
 import DataStorageInterfaces
 import FirebaseFirestore
 
-public class FirebaseDataStorageProvider: DataStorageProviderStrategyNOSQL {
+public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
     
     private var _db: Firestore!
     

@@ -5,7 +5,7 @@ import Foundation
 import RealmSwift
 import DataStorageInterfaces
 
-public class RealmDataStorageProvider: DataStorageProviderStrategySQL {
+public class RealmDataStorageProvider: DataStorageProviderStrategy {
 
     private var realm: Realm
     

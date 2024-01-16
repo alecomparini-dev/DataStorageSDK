@@ -78,6 +78,12 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
         fatalError("The method findByID, needs to be implemented by the subclasses ")
     }
 
+    
+    //  MARK: - UPDATE
+    public func update<T>(_ path: String, _ key: String, _ value: T) async throws {
+        fatalError("The method update, needs to be implemented by the subclasses ")
+    }
+
 }
 
 

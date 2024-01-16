@@ -89,6 +89,16 @@ public class FirebaseDataStorageProvider: DataStorageProviderStrategy {
     }
     
     
+//  MARK: - UPDATE
+    public override func update<T>(_ collection: String, _ documentID: String, _ value: T) async throws {
+        guard let data = value as? [String : Any] else { return }
+        
+        try await db.collection(collection)
+            .document(documentID)
+            .updateData(data)
+    }
+    
+    
 //  MARK: - PRIVATE AREA
     private func configure() {
         let settings = FirestoreSettings()

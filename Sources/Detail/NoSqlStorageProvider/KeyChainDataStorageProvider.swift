@@ -8,7 +8,7 @@ import RealmSwift
 
 import DataStorageInterfaces
 
-public class KeyChainDataStorageProvider {
+public class KeyChainDataStorageProvider: DataStorageProviderStrategy {
     
     private let appName: String
    
@@ -16,47 +16,47 @@ public class KeyChainDataStorageProvider {
         self.appName = appName
     }
 
-//    
-////  MARK: - INSERT
-//    public override func create(_ key: String, _ value: T) async throws -> T? {
-//        
-//        let query: [String: Any] = [
-//            kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrService as String: appName,
-//            kSecAttrAccount as String: key,
-//            kSecValueData as String: try JSONEncoder().encode(value as? [String])
-//        ]
-//        
-//        try await delete(key as! T)
-//        
-//        let status = SecItemAdd(query as CFDictionary, nil)
-//        
-//        //TODO: - CREATE ERROR
-//        guard status == errSecSuccess else {
-//            return nil
-//        }
-//        
-//        return value
-//    }
-//    
-//    
-////  MARK: - DELETE
-//    public override func delete(_ key: T) async throws {
-//        let deleteQuery: [String: Any] = [
-//            kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrService as String: appName,
-//            kSecAttrAccount as String: key
-//        ]
-//        
-//        let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
-//        
-//        //TODO: - CREATE ERROR
-//        guard statusDelete == errSecSuccess else {
-//            return
-//        }
-//    }
-//    
-//    
+    
+//  MARK: - INSERT
+    public override func create<T>(_ key: String, _ value: T) async throws -> T? {
+        
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: appName,
+            kSecAttrAccount as String: key,
+            kSecValueData as String: try JSONEncoder().encode(value as? [String])
+        ]
+        
+        try await delete(key as! T)
+        
+        let status = SecItemAdd(query as CFDictionary, nil)
+        
+        //TODO: - CREATE ERROR
+        guard status == errSecSuccess else {
+            return nil
+        }
+        
+        return value
+    }
+    
+    
+//  MARK: - DELETE
+    public override func delete<T>(_ key: T) async throws {
+        let deleteQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: appName,
+            kSecAttrAccount as String: key
+        ]
+        
+        let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
+        
+        //TODO: - CREATE ERROR
+        guard statusDelete == errSecSuccess else {
+            return
+        }
+    }
+    
+    
 ////  MARK: - FETCH
 //    public override func fetch() async throws -> T? {
 //        let query: [String: Any] = [

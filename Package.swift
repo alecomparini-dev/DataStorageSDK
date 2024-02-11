@@ -11,7 +11,7 @@ let package = Package(
     ],
     
     products: [
-        .library(name: "DataStorageSDKMain", targets: ["DataStorageSDKMain"]),
+        .library(name: "DataStorageSDK", targets: ["DataStorageSDK"]),
     ],
     
     
@@ -38,7 +38,7 @@ let package = Package(
 //  MARK: - TARGET DETAIL
         
         .target(
-            name: "DataStorageSDKMain",
+            name: "DataStorageSDK",
             dependencies: [
                 "DataStorageInterfaces",
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),

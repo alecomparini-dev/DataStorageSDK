@@ -86,29 +86,30 @@ public class KeyChainDataStorageProvider: DataStorageProviderStrategy {
 //        
 //        return nil 
 //    }
-//    
-//
-////  MARK: - FETCH BY ID
-//    public override func fetchById(_ forKey: String) async throws -> T? {
-//        let query: [String: Any] = [
-//            kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrService as String: appName,
-//            kSecAttrAccount as String: forKey,
-//            kSecReturnData as String: true,
-//            kSecMatchLimit as String: kSecMatchLimitOne
-//        ]
-//        
-//        var result: AnyObject?
-//        let status = SecItemCopyMatching(query as CFDictionary, &result)
-//        
-//        guard status == errSecSuccess, let valueData = result as? Data else {
-//            return nil
-//        }
-//            
-//        return try? JSONDecoder().decode([String].self, from: valueData) as? T
-//        
-//    }
-//    
+
+    
+
+//  MARK: - FIND BY ID
+    public override func findBy<T>(_ forKey: String) async throws -> T? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: appName,
+            kSecAttrAccount as String: forKey,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        guard status == errSecSuccess, let valueData = result as? Data else {
+            return nil
+        }
+            
+        return try? JSONDecoder().decode([String].self, from: valueData) as? T
+        
+    }
+    
     
     
 }

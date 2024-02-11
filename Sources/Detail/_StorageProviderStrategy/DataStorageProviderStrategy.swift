@@ -44,6 +44,12 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     }
 
     
+//  MARK: - DELETE
+    public func delete<T>(_ object: T) async throws {
+        fatalError("The method delete, needs to be implemented by the subclasses ")
+    }
+    
+    
     
 //  MARK: - PersistenceNOSQLProvider
     
@@ -83,6 +89,27 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     public func update<T>(_ path: String, _ key: String, _ value: T) async throws {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
+    
+    
+
+    
+    //    public func update(_ object: T) async throws -> T {
+    //        fatalError("The method update, needs to be implemented by the subclasses ")
+    //    }
+    //
+    //
+    //
+    ////  MARK: - PersistenceJSONProvider
+
+    //
+    //    public func update(_ key: String, _ value: T) async throws -> T {
+    //        fatalError("The method update, needs to be implemented by the subclasses ")
+    //    }
+    //
+        
+    //}
+
+    
 
 }
 
@@ -91,23 +118,3 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
 
 
 
-
-//    public func delete(_ object: T) async throws {
-//        fatalError("The method delete, needs to be implemented by the subclasses ")
-//    }
-//    
-//    public func update(_ object: T) async throws -> T {
-//        fatalError("The method update, needs to be implemented by the subclasses ")
-//    }
-//
-//
-//    
-////  MARK: - PersistenceJSONProvider
-
-//    
-//    public func update(_ key: String, _ value: T) async throws -> T {
-//        fatalError("The method update, needs to be implemented by the subclasses ")
-//    }
-//    
-    
-//}

@@ -58,7 +58,8 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
             ref.observeSingleEvent(of: .value, with: { snapshot in
                 guard let data = snapshot.valueInExportFormat() as? [String: Any] else { return continuation.resume(returning: []) }
-                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
+//                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
+                continuation.resume(returning: [data] as? [T] ?? [])
             }) { error in
                 continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
             }
@@ -73,7 +74,8 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
             ref.queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value, with: { snapshot in
                 guard let data = snapshot.valueInExportFormat() as? [String: Any] else { return continuation.resume(returning: []) }
-                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
+//                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
+                continuation.resume(returning: [data] as? [T] ?? [])
             }) { error in
                 continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
             }

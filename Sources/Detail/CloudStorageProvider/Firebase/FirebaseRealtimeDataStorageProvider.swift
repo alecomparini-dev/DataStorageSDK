@@ -10,18 +10,19 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     private var _db: Database!
     
     public override init() {
+        _db = Database.database()
         super.init()
     }
     
     public init(db: Database = Database.database()) {
-        self._db = db
+        _db = db
         super.init()
     }
     
     
 //  MARK: - GET PROPERTIES
     
-    public var db: Database {_db}
+    public var db: Database { _db }
     
     
 //  MARK: - INSERT

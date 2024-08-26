@@ -51,23 +51,36 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - FETCH
     
-//    public override func fetch<T>(_ collection: String) async throws -> [T] {
+    public override func fetch<T>(_ pathString: String) async throws -> [T] {
         
-//        let querySnapshot: QuerySnapshot = try await db.collection(collection).getDocuments()
-//        
-//        let data: [QueryDocumentSnapshot] = querySnapshot.documents
-//        
-//        return data.map { $0.data() } as? [T] ?? []
-//    }
+        return try await withCheckedThrowingContinuation { continuation in
+            let ref = db.reference().child("\(pathString)")
+    
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                guard let data = snapshot.valueInExportFormat() as? [[String: Any]] else { return continuation.resume(returning: []) }
+                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
+            }) { error in
+                continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
+            }
+        }
+        
+    }
     
     
-//    public override func fetch<T>(_ collection: String, limit: Int) async throws -> [T] {
-//        let querySnapshot: QuerySnapshot = try await db.collection(collection).limit(to: limit).getDocuments()
-//        
-//        let data: [QueryDocumentSnapshot] = querySnapshot.documents
-//        
-//        return data.map { $0.data() } as? [T] ?? []
-//    }
+    public override func fetch<T>(_ pathString: String, limit: Int = 10) async throws -> [T] {
+        return try await withCheckedThrowingContinuation { continuation in
+            
+            let ref = db.reference().child("\(pathString)")
+    
+            ref.queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value, with: { snapshot in
+                guard let data = snapshot.valueInExportFormat() as? [[String: Any]] else { return continuation.resume(returning: []) }
+                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
+            }) { error in
+                continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
+            }
+        }
+
+    }
 
     
     

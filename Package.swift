@@ -42,6 +42,7 @@ let package = Package(
             dependencies: [
                 "DataStorageInterfaces",
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
                 .product(name: "RealmSwift", package: "realm-swift")
             ],
             path: "Sources/Detail"

@@ -34,7 +34,7 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
         
         let document: DatabaseReference = try await ref.setValue(data)
         
-        return [document.key ?? "-": data] as? T
+        return ["key": document.key] as? T
     }
     
     public override func create<T>(_ pathString: String, _ key: String, _ value: T) async throws -> T? {
@@ -42,7 +42,7 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
         
         let ref = db.reference().child("\(pathString)/\(key)")
         
-        let _: DatabaseReference = try await ref.setValue(data)
+        try await ref.setValue(data)
         
         return value
     }
@@ -63,7 +63,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
                 continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
             }
         }
-        
     }
     
     public override func fetch<T>(_ pathString: String, limit: Int = 10) async throws -> [T] {
@@ -117,5 +116,4 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
         try await ref.removeValue()
     }
     
-
 }

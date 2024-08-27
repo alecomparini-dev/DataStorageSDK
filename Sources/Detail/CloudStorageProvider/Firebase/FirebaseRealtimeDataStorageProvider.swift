@@ -27,24 +27,24 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - INSERT
 
-    public override func create<T>(_ pathString: String, _ object: T) async throws -> T? {
-        guard let data = object as? [String : Any] else { return object }
+    public override func create<T>(_ pathString: String, _ value: T) async throws -> T? {
+        guard let data = value as? [String : Any] else { return value }
         
         let ref = db.reference().childByAutoId().child(pathString)
         
         let document: DatabaseReference = try await ref.setValue(data)
         
-        return [document.key ?? "-": object] as? T
+        return [document.key ?? "-": data] as? T
     }
     
-    public override func create<T>(_ pathString: String, _ documentID: String, _ object: T) async throws -> T? {
-        guard let data = object as? [String : Any] else { return object }
+    public override func create<T>(_ pathString: String, _ key: String, _ value: T) async throws -> T? {
+        guard let data = value as? [String : Any] else { return value }
         
-        let ref = db.reference().child("\(pathString)/\(documentID)")
+        let ref = db.reference().child("\(pathString)/\(key)")
         
         let _: DatabaseReference = try await ref.setValue(data)
         
-        return object
+        return value
     }
 
     
@@ -58,7 +58,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
             ref.observeSingleEvent(of: .value, with: { snapshot in
                 guard let data = snapshot.valueInExportFormat() as? [String: Any] else { return continuation.resume(returning: []) }
-//                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
                 continuation.resume(returning: [data] as? [T] ?? [])
             }) { error in
                 continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
@@ -74,7 +73,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
             ref.queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value, with: { snapshot in
                 guard let data = snapshot.valueInExportFormat() as? [String: Any] else { return continuation.resume(returning: []) }
-//                continuation.resume(returning: data.map { $0 } as? [T] ?? [])
                 continuation.resume(returning: [data] as? [T] ?? [])
             }) { error in
                 continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
@@ -85,23 +83,39 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - FIND BY
     
-//    public override func findBy<T>(_ collection: String, _ documentID: String) async throws -> T? {
-//        let querySnapshot: DocumentSnapshot = try await db.collection(collection)
-//            .document(documentID)
-//            .getDocument()
-//        
-//        return querySnapshot.data() as? T
-//    }
+    public override func findBy<T>(_ pathString: String, _ key: String) async throws -> T? {
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            
+            let ref = db.reference().child("\(pathString)/\(key)")
+    
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                guard let data = snapshot.valueInExportFormat() as? [String: Any] else { return continuation.resume(returning: nil) }
+                continuation.resume(returning: data as? T)
+            }) { error in
+                continuation.resume(throwing: DataStorageError.createError( "Error: \(error.localizedDescription)" ))
+            }
+        }
+    }
     
     
 //  MARK: - UPDATE
-//    public override func update<T>(_ collection: String, _ documentID: String, _ value: T) async throws {
-//        guard let data = value as? [String : Any] else { return }
-//        
-//        try await db.collection(collection)
-//            .document(documentID)
-//            .updateData(data)
-//    }
+    public override func update<T>(_ pathString: String, _ key: String, _ value: T) async throws {
+        guard let data = value as? [String : Any] else { return }
+        
+        let ref = db.reference().child("\(pathString)/\(key)")
+        
+        try await ref.updateChildValues(data)
+    }
+    
+    
+//  MARK: - DELETE
+    public override func delete(_ pathString: String, _ key: String) async throws {
+        
+        let ref = db.reference().child("\(pathString)/\(key)")
+        
+        try await ref.removeValue()
+    }
     
 
 }

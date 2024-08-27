@@ -79,7 +79,7 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     }
     
     
-    //  MARK: - FIND
+    //  MARK: - FIND BY
     public func findBy<T>(_ path: String, _ key: String) async throws -> T? {
         fatalError("The method findByID, needs to be implemented by the subclasses ")
     }
@@ -89,32 +89,12 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     public func update<T>(_ path: String, _ key: String, _ value: T) async throws {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
-    
-    
 
     
-    //    public func update(_ object: T) async throws -> T {
-    //        fatalError("The method update, needs to be implemented by the subclasses ")
-    //    }
-    //
-    //
-    //
-    ////  MARK: - PersistenceJSONProvider
-
-    //
-    //    public func update(_ key: String, _ value: T) async throws -> T {
-    //        fatalError("The method update, needs to be implemented by the subclasses ")
-    //    }
-    //
-        
-    //}
-
+    //  MARK: - DELETE
+    public func delete(_ path: String, _ key: String) async throws {
+        fatalError("The method update, needs to be implemented by the subclasses ")
+    }
     
 
 }
-
-
-
-
-
-

@@ -5,7 +5,7 @@ import Foundation
 import DataStorageInterfaces
 
 public class NSCacheStorageProvider: DataStorageProviderStrategy {
-    static let shared = NSCacheStorageProvider()
+    public static let shared = NSCacheStorageProvider()
     
     private let cache = NSCache<NSString, AnyObject>()
     

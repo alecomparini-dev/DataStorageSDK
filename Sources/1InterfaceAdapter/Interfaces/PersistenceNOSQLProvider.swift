@@ -15,8 +15,6 @@ public protocol PersistenceNOSQLProvider {
     func findBy<T>(_ path: String, _ key: String) async throws -> T?
     
     func update<T>(_ path: String, _ key: String, _ value: T) async throws
-
-    
     
 }
 

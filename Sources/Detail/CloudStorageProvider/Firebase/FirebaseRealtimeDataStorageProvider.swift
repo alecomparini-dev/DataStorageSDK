@@ -28,7 +28,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
 //  MARK: - INSERT
 
     public override func create<T>(_ pathString: String, _ value: T) async throws -> T? {
-        guard let data = value as? [String : Any] else { return value }
         
         let ref = db.reference().childByAutoId().child(pathString)
         
@@ -38,7 +37,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     }
     
     public override func create<T>(_ pathString: String, _ key: String, _ value: T) async throws -> T? {
-        guard let data = value as? [String : Any] else { return value }
         
         let ref = db.reference().child("\(pathString)/\(key)")
         
@@ -52,7 +50,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
 //  MARK: - FETCH
     
     public override func fetch<T>(_ pathString: String) async throws -> [T] {
-        
         return try await withCheckedThrowingContinuation { continuation in
             let ref = db.reference().child("\(pathString)")
     
@@ -83,7 +80,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
 //  MARK: - FIND BY
     
     public override func findBy<T>(_ pathString: String, _ key: String) async throws -> T? {
-        
         return try await withCheckedThrowingContinuation { continuation in
             
             let ref = db.reference().child("\(pathString)/\(key)")
@@ -100,8 +96,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - UPDATE
     public override func update<T>(_ pathString: String, _ key: String, _ value: T) async throws {
-        guard let data = value as? [String : Any] else { return }
-        
         let ref = db.reference().child("\(pathString)/\(key)")
         
         try await ref.updateChildValues(data)
@@ -110,7 +104,6 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - DELETE
     public override func delete(_ pathString: String, _ key: String) async throws {
-        
         let ref = db.reference().child("\(pathString)/\(key)")
         
         try await ref.removeValue()

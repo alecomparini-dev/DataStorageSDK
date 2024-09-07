@@ -93,9 +93,11 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
 //  MARK: - UPDATE
     public override func update<T>(_ pathString: String, _ key: String, _ value: T) async throws {
+        guard let data = value as? [String : Any] else { return }
+        
         let ref = db.reference().child("\(pathString)/\(key)")
         
-        try await ref.updateChildValues(value)
+        try await ref.updateChildValues(data)
     }
     
     

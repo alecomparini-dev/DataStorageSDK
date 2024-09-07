@@ -28,24 +28,21 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
 //  MARK: - INSERT
 
     public override func create<T>(_ pathString: String, _ value: T) async throws -> T? {
-        
         let ref = db.reference().childByAutoId().child(pathString)
         
-        let document: DatabaseReference = try await ref.setValue(data)
+        let document: DatabaseReference = try await ref.setValue(value)
         
         return ["key": document.key] as? T
     }
     
     public override func create<T>(_ pathString: String, _ key: String, _ value: T) async throws -> T? {
-        
         let ref = db.reference().child("\(pathString)/\(key)")
         
-        try await ref.setValue(data)
+        try await ref.setValue(value)
         
         return value
     }
 
-    
     
 //  MARK: - FETCH
     
@@ -98,7 +95,7 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     public override func update<T>(_ pathString: String, _ key: String, _ value: T) async throws {
         let ref = db.reference().child("\(pathString)/\(key)")
         
-        try await ref.updateChildValues(data)
+        try await ref.updateChildValues(value)
     }
     
     

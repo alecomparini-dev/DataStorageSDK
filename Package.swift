@@ -17,7 +17,8 @@ let package = Package(
     
     dependencies: [
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.28.0")),
-        .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "10.44.0"))
+        .package(url: "https://github.com/realm/realm-swift.git", branch: "v10.48.0" )
+//        .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "10.44.0"))
     ],
     
     

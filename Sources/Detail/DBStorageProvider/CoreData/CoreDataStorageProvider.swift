@@ -23,13 +23,9 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         
         context.insert(object)
         
-        let ret: [T] = try await findBy(column: "name", value: "Marcos")
-        print(ret)
-
         guard context.hasChanges else { return object as? T}
         
         do {
-            
             try await context.perform {
                 try self.context.save()
             }
@@ -83,11 +79,9 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         guard context.hasChanges else { return }
         
         do {
-            
             try await context.perform {
                 try self.context.save()
             }
-            
         } catch let error {
             context.rollback()
             throw error
@@ -98,19 +92,13 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
 //  MARK: - UPDATE
     
     public override func update<T>(_ object: T) async throws {
-        guard let object = object as? NSManagedObject else {
-            throw DataStorageError.objectMustBeNSManagedObject
-        }
-        
-        
+
         guard context.hasChanges else { return }
         
         do {
-            
             try await context.perform {
                 try self.context.save()
             }
-            
         } catch let error {
             context.rollback()
             throw error

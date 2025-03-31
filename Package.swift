@@ -6,7 +6,7 @@ let package = Package(
     name: "DataStorageSDK",
 
     platforms: [
-        .iOS(.v14),
+        .iOS(.v15),
         .macOS(.v12)
     ],
     

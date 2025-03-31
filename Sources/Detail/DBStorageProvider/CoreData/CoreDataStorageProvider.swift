@@ -26,9 +26,17 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         let ret: [T] = try await findBy(column: "name", value: "Marcos")
         print(ret)
 
+        guard context.hasChanges else { return object as? T}
         
-        if context.hasChanges {
-            try context.save()
+        do {
+            
+            try await context.perform {
+                try self.context.save()
+            }
+            
+        } catch let error {
+            context.rollback()
+            throw error
         }
         
         return object as? T

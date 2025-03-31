@@ -10,7 +10,6 @@ import DataStorageInterfaces
 
 
 public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLProvider {
-
     public init() {}
 
 //  MARK: - CREATE
@@ -49,6 +48,11 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
     
+    
+//  MARK: - DELETE
+    public func update<T>(_ object: T) async throws {
+        fatalError("The method delete, needs to be implemented by the subclasses ")
+    }
     
     
 //  MARK: - PersistenceNOSQLProvider

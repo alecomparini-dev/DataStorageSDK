@@ -23,6 +23,10 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         
         context.insert(object)
         
+        let ret: [T] = try await findBy(column: "name", value: "Marcos")
+        print(ret)
+
+        
         if context.hasChanges {
             try context.save()
         }
@@ -39,11 +43,6 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         }
         
         let request = object.fetchRequest()
-        
-        
-        let ret: [T] = try await findBy(column: "name", value: "Marcos")
-        
-        print(ret)
         
         return try context.fetch(request) as? [T] ?? []
     }

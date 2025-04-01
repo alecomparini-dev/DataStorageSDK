@@ -52,7 +52,7 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
     }
     
     
-//  MARK: - FIND BY COLUMN , VALUE
+//  MARK: - FIND BY ID
     
     public override func findBy<T,V>(column: String, value: V) async throws -> [T] {
         guard let object = T.self as? NSManagedObject.Type else {

@@ -107,7 +107,10 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
 //  MARK: - UPDATE
     
     public override func update<T>(_ object: T) async throws {
-
+        guard let object = T.self as? NSManagedObject.Type else {
+            throw DataStorageError.objectMustBeNSManagedObject
+        }
+        
         guard context.hasChanges else { return }
         
         do {

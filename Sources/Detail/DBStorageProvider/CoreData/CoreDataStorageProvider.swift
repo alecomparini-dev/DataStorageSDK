@@ -59,11 +59,26 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
             throw DataStorageError.objectMustBeNSManagedObject
         }
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: object))
+        let fetchRequest = object.fetchRequest()
         
         fetchRequest.predicate = NSPredicate(format: "%K == %@", column, value as! CVarArg)
         
         return try context.fetch(fetchRequest) as! [T]
+    }
+    
+//  MARK: - FIND BY COLUMN , VALUE
+    
+    public override func findBy<T>(_ id: String) async throws -> T? {
+        guard let object = T.self as? NSManagedObject.Type else {
+            throw DataStorageError.objectMustBeNSManagedObject
+        }
+        
+        let fetchRequest = object.fetchRequest()
+        
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        fetchRequest.fetchLimit = 1
+        
+        return try context.fetch(fetchRequest).first as? T
     }
 
     

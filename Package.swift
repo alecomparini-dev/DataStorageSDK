@@ -6,7 +6,7 @@ let package = Package(
     name: "DataStorageSDK",
 
     platforms: [
-        .iOS(.v15),
+        .iOS(.v16),
         .macOS(.v12)
     ],
     
@@ -17,7 +17,7 @@ let package = Package(
     
     dependencies: [
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.28.0")),
-        .package(url: "https://github.com/realm/realm-swift.git", branch: "v10.48.0" )
+        .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "20.0.4") )
 //        .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "10.44.0"))
     ],
     

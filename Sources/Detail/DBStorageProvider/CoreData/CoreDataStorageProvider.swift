@@ -5,7 +5,8 @@ import Foundation
 import CoreData
 import DataStorageInterfaces
 
-public class CoreDataStorageProvider: DataStorageProviderStrategy {
+
+public class CoreDataStorageProvider: DataStorageProviderStrategy, @unchecked Sendable {
     
     private let context:  NSManagedObjectContext
     
@@ -16,6 +17,7 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - INSERT
+    
     public override func create<T>(_ object: T) async throws -> T? {
         guard let object = object as? NSManagedObject else {
             throw(DataStorageError.objectMustBeNSManagedObject)
@@ -26,7 +28,8 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         guard context.hasChanges else { return object as? T}
         
         do {
-            try await context.perform {
+            try await context.perform { [weak self] in
+                guard let self else { return }
                 try self.context.save()
             }
             
@@ -66,6 +69,7 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         return try context.fetch(fetchRequest) as! [T]
     }
     
+    
 //  MARK: - FIND BY COLUMN , VALUE
     
     public override func findBy<T>(_ id: String) async throws -> T? {
@@ -94,8 +98,8 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
         guard context.hasChanges else { return }
         
         do {
-            try await context.perform {
-                try self.context.save()
+            try await context.perform { [weak self] in
+                try self?.context.save()
             }
         } catch let error {
             context.rollback()
@@ -107,15 +111,15 @@ public class CoreDataStorageProvider: DataStorageProviderStrategy {
 //  MARK: - UPDATE
     
     public override func update<T>(_ object: T) async throws {
-        guard let object = T.self as? NSManagedObject.Type else {
+        guard T.self is NSManagedObject.Type else {
             throw DataStorageError.objectMustBeNSManagedObject
         }
         
         guard context.hasChanges else { return }
         
         do {
-            try await context.perform {
-                try self.context.save()
+            try await context.perform { [weak self] in
+                try self?.context.save()
             }
         } catch let error {
             context.rollback()

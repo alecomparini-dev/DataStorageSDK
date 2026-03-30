@@ -4,8 +4,6 @@
 import Foundation
 import Security
 
-import RealmSwift
-
 import DataStorageInterfaces
 
 public class KeyChainDataStorageProvider: DataStorageProviderStrategy {

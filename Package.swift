@@ -45,7 +45,5 @@ let package = Package(
             path: "Sources/Detail"
         ),
         
-        
-        
     ]
 )

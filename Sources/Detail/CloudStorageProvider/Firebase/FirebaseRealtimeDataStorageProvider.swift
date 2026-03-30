@@ -92,6 +92,7 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - UPDATE
+    
     public override func update<T>(_ pathString: String, _ key: String, _ value: T) async throws {
         guard let data = value as? [String : Any] else { return }
         
@@ -102,6 +103,7 @@ public class FirebaseRealtimeDataStorageProvider: DataStorageProviderStrategy {
     
     
 //  MARK: - DELETE
+    
     public override func delete(_ pathString: String, _ key: String) async throws {
         let ref = db.reference().child("\(pathString)/\(key)")
         

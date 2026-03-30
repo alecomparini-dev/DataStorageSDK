@@ -2,8 +2,6 @@
 //
 
 import Foundation
-
-import RealmSwift
 import CoreData
 
 import DataStorageInterfaces
@@ -12,13 +10,16 @@ import DataStorageInterfaces
 public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLProvider {
     public init() {}
 
+    
 //  MARK: - CREATE
+    
     public func create<T>(_ object: T) async throws -> T? {
         fatalError("The method create, needs to be implemented by the subclasses ")
     }
 
     
 //  MARK: - FETCH
+    
     public func fetch<T>() async throws -> [T] {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
@@ -44,20 +45,24 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
 
     
 //  MARK: - DELETE
+    
     public func delete<T>(_ object: T) async throws {
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
     
     
 //  MARK: - DELETE
+    
     public func update<T>(_ object: T) async throws {
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
     
     
+    
 //  MARK: - PersistenceNOSQLProvider
     
     //  MARK: - CREATE
+    
     public func create<T>(_ key: String, _ value: T) async throws -> T? {
         fatalError("The method create, needs to be implemented by the subclasses ")
     }
@@ -68,6 +73,7 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     
 
     //  MARK: - FETCH
+    
     public func fetch<T>(_ path: String) async throws -> [T] {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
@@ -78,23 +84,28 @@ public class DataStorageProviderStrategy: PersistenceProvider, PersistenceNOSQLP
     
     
     //  MARK: - COUNT
+    
     public func fetchCount(_ key: String) async throws -> Int {
         fatalError("The method fetchCount, needs to be implemented by the subclasses ")
     }
     
     
     //  MARK: - FIND BY
+    
     public func findBy<T>(_ path: String, _ key: String) async throws -> T? {
         fatalError("The method findByID, needs to be implemented by the subclasses ")
     }
     
+    
     //  MARK: - UPDATE
+    
     public func update<T>(_ path: String, _ key: String, _ value: T) async throws {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
 
     
     //  MARK: - DELETE
+    
     public func delete(_ path: String, _ key: String) async throws {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }

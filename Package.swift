@@ -16,9 +16,7 @@ let package = Package(
     
     
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.28.0")),
-        .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "20.0.4") )
-//        .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "10.44.0"))
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "11.0.0"))
     ],
     
     
@@ -29,8 +27,7 @@ let package = Package(
         .target(
             name: "DataStorageInterfaces",
             dependencies: [
-                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
-                .product(name: "RealmSwift", package: "realm-swift")
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
             ],
             path: "Sources/1InterfaceAdapter/Interfaces"
         ),
@@ -43,18 +40,12 @@ let package = Package(
             dependencies: [
                 "DataStorageInterfaces",
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
-                .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
-                .product(name: "RealmSwift", package: "realm-swift")
+                .product(name: "FirebaseDatabase", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail"
         ),
         
         
-        
-
-//  MARK: - TESTS TARGETS AREA
-        
-//        .testTarget(name: "DataStorageSDKTests", dependencies: []),
         
     ]
 )
